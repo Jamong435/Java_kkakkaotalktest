@@ -52,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
 
         mapView.addPOIItem(marker);
 
+        MapPOIItem customMarker= new MapPOIItem();
+        customMarker.setItemName("custom marker");
+        customMarker.setTag(1);
+
+
+        
+
 
 
 
@@ -79,7 +86,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
+
 
     public static String getSigneture(Context context) {
         PackageManager pm = context.getPackageManager();
