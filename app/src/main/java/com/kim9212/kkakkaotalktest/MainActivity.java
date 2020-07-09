@@ -50,11 +50,8 @@ public class MainActivity extends AppCompatActivity {
         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
 
 
-        mapView.addPOIItem(marker);
 
-        MapPOIItem customMarker= new MapPOIItem();
-        customMarker.setItemName("custom marker");
-        customMarker.setTag(1);
+
 
 
         
