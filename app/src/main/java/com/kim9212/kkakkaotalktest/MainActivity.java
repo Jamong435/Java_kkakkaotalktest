@@ -1,7 +1,10 @@
 package com.kim9212.kkakkaotalktest;
 
+import net.daum.mf.map.api.CameraUpdateFactory;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
+import net.daum.mf.map.api.MapPointBounds;
+import net.daum.mf.map.api.MapPolyline;
 import net.daum.mf.map.api.MapView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +13,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -48,6 +52,25 @@ public class MainActivity extends AppCompatActivity {
         marker.setMapPoint(MapPoint.mapPointWithGeoCoord(37.5, 126.97));
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
         marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+
+
+
+        MapPolyline polyline = new MapPolyline();
+        polyline.setLineColor(Color.argb(255, 255, 51, 0)); // Polyline 컬러 지정.
+
+        // Polyline 좌표 지정.
+        polyline.addPoint(MapPoint.mapPointWithGeoCoord(35.899699, 128.544156));
+        polyline.addPoint(MapPoint.mapPointWithGeoCoord(35.899220,128.544197));
+        polyline.addPoint(MapPoint.mapPointWithGeoCoord(35.899267,128.545090));
+        polyline.addPoint(MapPoint.mapPointWithGeoCoord(35.897744,128.546570));
+
+        // Polyline 지도에 올리기.
+        mapView.addPolyline(polyline);
+
+        // 지도뷰의 중심좌표와 줌레벨을 Polyline이 모두 나오도록 조정.
+        MapPointBounds mapPointBounds = new MapPointBounds(polyline.getMapPoints());
+        int padding = 100; // px
+        mapView.moveCamera(CameraUpdateFactory.newMapPointBounds(mapPointBounds, padding));
 
 
 
