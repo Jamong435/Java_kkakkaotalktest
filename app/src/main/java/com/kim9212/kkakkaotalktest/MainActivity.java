@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements MapView.CurrentLo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        
+
         mMapView = (MapView) findViewById(R.id.map_view);
         mMapView.setCurrentLocationEventListener(this);
 
@@ -130,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements MapView.CurrentLo
         mtextView2.setText(String.valueOf(mapPointGeo.longitude));
 
         address = getCompleteAddressString(this, mapPointGeo.latitude, mapPointGeo.longitude);
+
+
 
         G.address=address;
         getSharedPreferences("name",MODE_PRIVATE).edit().putString("addr",address).commit();
