@@ -131,8 +131,6 @@ public class MainActivity extends AppCompatActivity implements MapView.CurrentLo
 
         address = getCompleteAddressString(this, mapPointGeo.latitude, mapPointGeo.longitude);
 
-
-
         G.address=address;
         getSharedPreferences("name",MODE_PRIVATE).edit().putString("addr",address).commit();
         mtextView3.setText(address);
