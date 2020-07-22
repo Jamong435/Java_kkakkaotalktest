@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapReverseGeoCoder;
 import net.daum.mf.map.api.MapView;
@@ -72,20 +73,27 @@ public class MainActivity extends AppCompatActivity implements MapView.CurrentLo
 
 
         mSmsButton = (Button) findViewById(R.id.button_sms);
-        mKakaoButton = (Button) findViewById(R.id.button_kakao);
+
+//        mMapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.53737528, 127.00557633), true);
+//
+//        mMapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(37.5, 126.97), true);
+
+
+
+
+
+
+
 
         if (!checkLocationServicesStatus()) {
             showDialogForLocationServiceSetting();
         } else {
             checkRunTimePermission();
         }
-
         checkSmsPermission();
-
         mSmsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String phoneNo = "01052725312";
 
                 try {
@@ -93,10 +101,22 @@ public class MainActivity extends AppCompatActivity implements MapView.CurrentLo
                     smsManager.sendTextMessage(phoneNo, null, address, null, null);
                     Toast.makeText(getApplicationContext(), "전송 완료", Toast.LENGTH_LONG).show();
 
-//
                   Intent intent = new Intent(MainActivity.this, locationsaved.class);
                     MainActivity.this.startActivity(intent);
 
+                    mMapView.setZoomLevel(3, true);
+                    mMapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude), 9, true);
+                    mMapView.zoomIn(true);
+                    mMapView.zoomOut(true);
+
+                    MapPOIItem marker = new MapPOIItem();
+                    marker.setItemName("Default Marker");
+                    marker.setTag(0);
+                    marker.setMapPoint(MapPoint.mapPointWithGeoCoord(mapPointGeo.latitude, mapPointGeo.longitude));
+                    marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+                    marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin); // 마커를 클릭했을때, 기본으로 제공하는 RedPin 마커 모양.
+
+                    mMapView.addPOIItem(marker);
 
 
 
@@ -333,5 +353,11 @@ public class MainActivity extends AppCompatActivity implements MapView.CurrentLo
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_SEND_PERMISSON);
             }
         }
+    }
+
+    public void togo(View view) {
+
+
+
     }
 }

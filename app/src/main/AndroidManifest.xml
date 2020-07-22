@@ -24,7 +24,9 @@
         </activity>
         <activity android:name=".locationsaved"/>
 
-
+        <meta-data
+            android:name="com.kakao.sdk.kakaonavi.useWebView"
+            android:value="false" />
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="61eaa960c887c72853fec479bc6401b6"/>
     </application>
 
